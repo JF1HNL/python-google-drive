@@ -5,6 +5,7 @@ import os.path
 import io
 import sys
 import glob
+import const
 
 # pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 from googleapiclient.discovery import build
@@ -13,7 +14,7 @@ from google.auth.transport.requests import Request
 from googleapiclient.http import MediaFileUpload
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
-FOLDER_NAME = 'test'
+FOLDER_NAME = const.FOLDER_NAME
 os.chdir('files')
 
 files = glob.glob("./*")
@@ -66,8 +67,9 @@ def main():
     folder_id = folders[0]["id"] # 複数ある場合を考えない
     drive_files_name = list(map(lambda it : it["name"], drive_files))
     for file in files:
+      print(file)
       file_metadata = {
-          'name': file.replace('./', ''),
+          'name': file.replace('./', '').replace('.\\', ''),
           'parents': [folder_id]
       }
 

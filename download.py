@@ -4,6 +4,7 @@ import pickle
 import os.path
 import io
 import sys
+import const
 
 # pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 from googleapiclient.discovery import build
@@ -12,7 +13,7 @@ from google.auth.transport.requests import Request
 from googleapiclient.http import MediaIoBaseDownload
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
-FOLDER_NAME = 'test'
+FOLDER_NAME = const.FOLDER_NAME
 
 os.chdir('files')
 

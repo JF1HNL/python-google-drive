@@ -1,0 +1,2 @@
+FOLDER_NAME = ""
+PC_NAME = ""
