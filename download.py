@@ -70,6 +70,7 @@ def main():
     # Download
     if files:
         for file in files:
+            print(file["name"])
             request = drive.files().get_media(fileId=file['id'])
             fh = io.FileIO(file['name'], mode='wb')
             downloader = MediaIoBaseDownload(fh, request)
