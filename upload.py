@@ -52,18 +52,38 @@ def main():
         folders = results.get('files', [])
         if not folders: print('No folders found.')
 
+    # get drive files 
+    folder = folders[0]
+    query = '"' + folder['id'] + '" in parents'
+    results = drive.files().list(
+        pageSize=100, 
+        fields='nextPageToken, files(id, name)',
+        q=query
+        ).execute()
+    drive_files = results.get('files', [])
+
     # file upload
     folder_id = folders[0]["id"] # 複数ある場合を考えない
+    drive_files_name = list(map(lambda it : it["name"], drive_files))
     for file in files:
       file_metadata = {
           'name': file.replace('./', ''),
           'parents': [folder_id]
       }
+
       media = MediaFileUpload(
           file, 
           mimetype='text/plain', 
           resumable=True
       )
+
+      if file_metadata["name"] in drive_files_name:
+        file = drive.files().update(
+          fileId = drive_files[drive_files_name.index(file_metadata["name"])]["id"],
+          media_body=media
+        ).execute()
+        continue
+
       file = drive.files().create(
           body=file_metadata, media_body=media, fields='id'
       ).execute()
