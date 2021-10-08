@@ -58,7 +58,6 @@ def main():
             if query != '' : query += ' or '
             query += '"' + folder['id'] + '" in parents'
         query = '(' + query + ')'
-        query += ' and (name contains ".jpg" or name contains ".png" or name contains ".txt")'
 
         results = drive.files().list(
             pageSize=100, 
