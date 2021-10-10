@@ -5,6 +5,13 @@ import os.path
 import io
 import sys
 import const
+import os
+import shutil
+
+# すでに持っているものはfile.bakに動かす
+if os.path.exists("files.bak"): shutil.rmtree("files.bak")
+os.rename("files", "files.bak")
+os.mkdir('files')
 
 # pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 from googleapiclient.discovery import build
