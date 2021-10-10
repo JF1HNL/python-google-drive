@@ -1,6 +1,9 @@
 # python-google-drive
 Pythonを使ってGoogle Driveと情報のやり取りをしよう。
 
+## log
+ログを一緒にアップロードする。これは、アップロードした日時とPCを記録している。
+
 ## 必要なもの
 - https://console.developers.google.com/apis/credentials
 

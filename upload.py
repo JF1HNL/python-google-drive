@@ -6,6 +6,7 @@ import io
 import sys
 import glob
 import const
+import datetime
 
 # pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 from googleapiclient.discovery import build
@@ -17,8 +18,13 @@ SCOPES = ['https://www.googleapis.com/auth/drive']
 FOLDER_NAME = const.FOLDER_NAME
 os.chdir('files')
 
-files = glob.glob("./*")
+dt_now = datetime.datetime.now()
 
+log = open("log.txt", "a")
+log.write(dt_now.strftime('%Y-%m-%d %H:%M:%S') + "\t" + const.PC_NAME + "\n")
+log.close()
+
+files = glob.glob("./*")
 
 def main():
     # OAuth
