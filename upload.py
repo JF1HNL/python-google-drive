@@ -7,6 +7,7 @@ import sys
 import glob
 import const
 import datetime
+import filetype
 
 # pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 from googleapiclient.discovery import build
@@ -81,7 +82,7 @@ def main():
 
       media = MediaFileUpload(
           file, 
-          mimetype='text/plain', 
+          mimetype= filetype.FILETYPE[file.split(".")[2]] if file.split(".")[2] in filetype.FILETYPE else "text/plain", 
           resumable=True
       )
 
